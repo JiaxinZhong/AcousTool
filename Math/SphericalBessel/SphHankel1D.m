@@ -6,20 +6,15 @@
 %	z	--- 宗量；必须在第2维及以上
 % --------------------------------------------------------------------------
 % 输出
-%	dh	---	球Hankel函数的微分
+%	hd	---	球Hankel函数的微分
 % ==========================================================================
-function dh = SphHankel1D(n, z)
-	n = n(:);
-	N = max(n);
+function hd = SphHankel1D(max_order, z)
 	z_row = z(:).';
 
-	% 先计算出球Hankel函数的值
-	h = SphHankel1((0:N+1).', z_row);
-	% dh = zeros(N+1, length(z_row));
-	% dh(1,:) = (cos(z_row)-sin(z_row)./z_row)./z_row;
-	% dh(2:end,:) = h(1:N,:) - (1:N).' ./ z_row .*h(2:N+1,:);
-	dh = (0:N).'./z_row .* h(1:N+1,:) - h(2:N+2,:);
+	h = SphHankel1((0:max_order+1).', z_row);
+    n = (0:max_order).';
 
-	dh = dh(n+1, :);
-	dh = reshape(dh, size(n.*z));
+	hd = n./z_row .* h(1:end-1,:) - h(2:end,:);
+
+	hd = reshape(hd, size(n.*z));
 end
