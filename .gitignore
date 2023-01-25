@@ -1,0 +1,19 @@
+# MacOS file
+.DS_Store
+
+# Vim files
+*.swp
+
+# MATLAB data
+*.mat
+*.m~
+
+# Images
+*.jpg
+*.jpeg
+*.img
+
+# Mathematica
+*.nb
+
+*.zip
